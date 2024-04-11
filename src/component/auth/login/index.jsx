@@ -21,6 +21,7 @@ const Login = ({ isShown, onOpen }) => {
   const handleLoginClick = () => {
     loginApi(userInfo.email, userInfo.password)
       .then((res) => {
+        console.log("res", res);
         notice("success", "로그인 성공");
         localStorage.setItem("access_token", res.data.access_token);
         navigate("/todo");

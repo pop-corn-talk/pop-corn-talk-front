@@ -1,9 +1,9 @@
 import { apiClient } from "./client";
 
 export const loginApi = async (email, password) => {
-  return apiClient.post("/auth/signin", { email, password });
+  return apiClient.post("/users/login", { email, password });
 };
 
 export const signUpApi = async (email, password) => {
-  return apiClient.post("/auth/signup", { email, password });
+  return apiClient.post("/users/signup", { email, password });
 };

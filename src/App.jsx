@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { mainContainer } from "./shared/globalStyle";
 
 const Todo = lazy(() => import("./pages/Todo"));
+console.log(process.env.REACT_APP_API_URL);
 
 function App() {
   return (

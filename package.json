@@ -45,9 +45,10 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.26.0",
-    "eslint-config-prettier": "^8.5.0",
+    "@babel/eslint-parser": "^7.5.4",
+    "@babel/eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
     "prettier": "^2.7.1"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

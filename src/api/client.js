@@ -1,7 +1,8 @@
 import axios from "axios";
-
+const url = process.env.REACT_APP_API_URL;
+console.log("url", url);
 export const apiClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: url,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
