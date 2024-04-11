@@ -5,7 +5,8 @@ import { lazy, Suspense } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { mainContainer } from "./shared/globalStyle";
 import  Profiles  from "./pages/Profiles";
-import  Headers  from "./pages/Headers";
+import  ButtonToUserProfile  from "./pages/ButtonToUserProfile";
+import OtherProfiles from "./pages/OthersProfile";
 
 // const Todo = lazy(() => import("./pages/Post"));
 
@@ -14,7 +15,7 @@ console.log(process.env.REACT_APP_API_URL);
 function App() {
   return (
     <>
-    <Headers/>
+    <ButtonToUserProfile/>
     <Routes>
       
       <Route path="/" element={<Auth />} />
@@ -28,6 +29,7 @@ function App() {
         }
       />
       <Route path="/users/profile" element={<Profiles />}/>
+      <Route path="/users/listpage" element={<OtherProfiles />}/>
     </Routes>
     </>
   );

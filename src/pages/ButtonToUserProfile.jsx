@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-export default function Headers(){
+export default function ButtonToUserProfile(){
     return(
         <button>
             <Link to="/users/profile">

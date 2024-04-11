@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getUserInfo } from '../api/usersInfo'; // Assuming you have an apiClient module
+import { getUserInfo } from '../api/usersInfo'; 
+import { Link } from "react-router-dom"
 import './css/profile.css';
 
 function Profiles() {
@@ -20,9 +21,25 @@ function Profiles() {
             console.log("error");
           });
     };
-
+//
+ function ToUserPage(){
+    return(
+        <button>
+            <Link to="/users/listpage?page=1">
+            other profile</Link></button>
+    )
+ }
+ function ToHome(){
+    return(
+        <button>
+            <Link to="/">
+            Home</Link></button>
+    )
+ }
     return (
         <div>
+            <ToUserPage/>
+            <ToHome/>
             {userInfo && (
                 <div className="container">
                 <div className="details">

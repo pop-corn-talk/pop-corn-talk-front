@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { getOtherUserInfo } from '../api/usersInfo'; // Assuming you have an apiClient module
+import React, { useState, useEffect } from "react";
+import { getUserInfoPage } from "../api/usersInfo"; // Assuming you have an apiClient module
 
-function Profiles() {
-    const [userInfo, setUserInfo] = useState(null); // Using useState hook to manage state
+function OtherProfiles() {
+  const [userInfoList, setUserInfoList] = useState(null);
+  // state change-> re-rendering
+  const params = new URLSearchParams(document.location.search);
+  useEffect(() => {
+    getlist(params.get("page"));
+  }, []);
 
-    useEffect(() => {
-        // Function to execute when the component mounts
-        handleButtonClick();
-    }, []);
+  const getlist = (pages) => {
+    getUserInfoPage(pages).then((res) => {
+        console.log(res)
+      setUserInfoList(res.data.data.content);
+    });
+  };
 
-    const handleButtonClick = () => {
-        getOtherUserInfo(1)
-          .then((res) => {
-            console.log("success", "조회 성공 : " + res.data.data.email);
-            setUserInfo(res.data.data.email); // Updating userInfo using setUserInfo
-          })
-          .catch((err) => {
-            console.log("error");
-          });
-    };
-
-    return (
-        <div>
-            <h2>User Info</h2>
-            {userInfo && (
-                <div>
-                    <p>Email: {userInfo}</p>
-                    {/* Add more user info fields as needed */}
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <div style={{ width: 700, height: 700, backgroundColor: "white", display:"block"}}>
+        <br />
+      <div style={{ width: 600, height: 500, backgroundColor: "white",marginTop:30,marginLeft:100}}>
+      <h2 style={{ marginTop: 30, margin: 20 }}>User Info : page {params.get("page")}</h2>
+      <p style={{display:"block"}}>
+      {userInfoList && (
+        <ol>
+          {userInfoList.map(userInfo => <li> :  {userInfo.email}</li>)}
+        </ol>
+      )}
+      </p>
+      </div>
+      </div>
+  );
 }
 
-export default Profiles;
+export default OtherProfiles;
