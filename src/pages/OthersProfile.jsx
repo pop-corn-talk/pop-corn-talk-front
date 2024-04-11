@@ -28,11 +28,11 @@ function OtherProfiles() {
     <div style={{ width: 700, height: 700, backgroundColor: "white", display:"block"}}>
         <br />
       <div style={{ width: 600, height: 500, backgroundColor: "white",marginTop:30,marginLeft:100}}>
-      <h2 style={{ marginTop: 30, margin: 20 }}>User Info : page {pagenNum}</h2>
+      <h2 style={{ marginTop: 30, margin: 20 }}>User Info List : page {pagenNum}</h2>
       <p style={{display:"block"}}>
       {userInfoList && (
         <ol>
-          {userInfoList.map(userInfo => <li> :  {userInfo.email}</li>)}
+          {userInfoList.map(userInfo => <li> {userInfo.email}</li>)}
         </ol>
       )}
       </p>
