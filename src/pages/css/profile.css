@@ -1,0 +1,19 @@
+.container {
+    width: 300px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  }
+  
+  .details {
+    font-family: Arial, sans-serif;
+  }
+  
+  .label {
+    font-weight: bold;
+  }
+  
+  .value {
+    margin-bottom: 10px;
+  }

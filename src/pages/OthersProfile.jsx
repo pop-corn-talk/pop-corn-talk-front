@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserInfo } from '../api/usersInfo'; // Assuming you have an apiClient module
-import './css/profile.css';
+import { getOtherUserInfo } from '../api/usersInfo'; // Assuming you have an apiClient module
 
 function Profiles() {
     const [userInfo, setUserInfo] = useState(null); // Using useState hook to manage state
@@ -11,10 +10,10 @@ function Profiles() {
     }, []);
 
     const handleButtonClick = () => {
-        getUserInfo()
+        getOtherUserInfo(1)
           .then((res) => {
             console.log("success", "조회 성공 : " + res.data.data.email);
-            setUserInfo(res.data.data);
+            setUserInfo(res.data.data.email); // Updating userInfo using setUserInfo
           })
           .catch((err) => {
             console.log("error");
@@ -23,17 +22,14 @@ function Profiles() {
 
     return (
         <div>
+            <h2>User Info</h2>
             {userInfo && (
-                <div className="container">
-                <div className="details">
-                    <h2>User Info</h2>
-                    <a className="label">Email : </a><a className="value">{userInfo.email} </a>
-                    <p className="label">오늘 남은 포인트 얻기: {userInfo.dailyPostsLimit}</p>
-                    <p className="label">포인트: {userInfo.point}</p>
-                </div>
+                <div>
+                    <p>Email: {userInfo}</p>
+                    {/* Add more user info fields as needed */}
                 </div>
             )}
-    </div>
+        </div>
     );
 }
 
