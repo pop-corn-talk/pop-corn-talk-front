@@ -19,16 +19,20 @@ const Login = ({ isShown, onOpen }) => {
   } = useSignForm();
 
   const handleLoginClick = () => {
-    loginApi(userInfo.email, userInfo.password)
-      .then((res) => {
-        console.log("res", res);
-        notice("success", "로그인 성공");
-        localStorage.setItem("access_token", res.data.access_token);
-        navigate("/todo");
-      })
-      .catch((err) => {
-        notice("error", err.response.data.message);
-      });
+    loginApi(userInfo.email, userInfo.password).then((res) => {
+      console.log("Response Data:", res); // Log entire response data
+      const authorizationHeader = res.headers["authorization"];
+      // Extract Authorization header
+      if (authorizationHeader) {
+        const accessToken = authorizationHeader.split(" ")[1]; // Extract token from Authorization header
+        console.log("Access Token:", accessToken); // Log token value
+        localStorage.setItem("access_token", accessToken); // Store token in local storage
+        notice("success", "로그인 성공"); // Display success message
+        navigate("/post"); // Redirect to todo page
+      } else {
+        console.error("Authorization header not found in response."); // Log error if Authorization header is missing
+      }
+    });
   };
 
   return (
