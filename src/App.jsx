@@ -5,7 +5,8 @@ import { lazy, Suspense } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { mainContainer } from "./shared/globalStyle";
 
-const Todo = lazy(() => import("./pages/Todo"));
+// const Todo = lazy(() => import("./pages/Post"));
+
 console.log(process.env.REACT_APP_API_URL);
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         path="/todo"
         element={
           <Suspense fallback={<div css={mainContainer}>...로딩중</div>}>
-            <Todo />
+            
           </Suspense>
         }
       />
