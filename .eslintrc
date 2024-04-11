@@ -1,4 +1,5 @@
 {
   "rules": {},
-  "parser": "@babel/eslint-parser"
+  "parser": "@babel/eslint-parser",
+  "plugins": ["react"]
 }

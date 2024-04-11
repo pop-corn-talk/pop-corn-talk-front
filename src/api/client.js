@@ -6,10 +6,12 @@ export const apiClient = axios.create({
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
+    "Access-Control-Expose-Headers": "*",
   },
 });
 
 apiClient.interceptors.request.use((config) => {
+  console.log("config", config);
   const accessToken = localStorage.getItem("access_token");
 
   if (accessToken && config.headers) {
