@@ -7,6 +7,10 @@ import { mainContainer } from "./shared/globalStyle";
 import  Profiles  from "./pages/Profiles";
 import  ButtonToUserProfile  from "./pages/ButtonToUserProfile";
 import OtherProfiles from "./pages/OthersProfile";
+import ProductOrder from "./pages/ProductOrder"
+
+
+
 
 // const Todo = lazy(() => import("./pages/Post"));
 
@@ -30,6 +34,7 @@ function App() {
       />
       <Route path="/users/profile" element={<Profiles />}/>
       <Route path="/users/listpage" element={<OtherProfiles />}/>
+      <Route path="/products/shopping" element={<ProductOrder />}/>
     </Routes>
     </>
   );
