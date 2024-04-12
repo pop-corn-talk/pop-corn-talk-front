@@ -29,6 +29,9 @@ function orderItem(itemId) {
       const paragraph = document.getElementById(itemId);
 
       const num = paragraph.textContent;
+      if(Number(num-1)<1){
+        window.location.reload;
+      }
       paragraph.textContent = ""+Number(num-1);
    });
 };
