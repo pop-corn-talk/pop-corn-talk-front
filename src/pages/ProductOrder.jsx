@@ -49,7 +49,7 @@ function orderItem(itemId) {
             <p>남은 수량 : {Product.amount}</p>
             <br/>
             {/* 이 버튼이 문제!!!! 클릭 하면 모든 상품들이 무한 주문됨*/}
-            {/* HTML 이 아니다!!  onClick 에 함수 넣으면 무한 반복합니다 ()=> 를 같이 넣어 주세요*/}
+            {/* HTML 이 아니라 react 다!!!  onClick 에 함수 넣으면 무한 반복합니다 ()=> 를 같이 넣어 주세요*/}
             <button className="button" onClick={()=>orderItem(Product.id)}> 주문 </button>
 
           </div>)}
