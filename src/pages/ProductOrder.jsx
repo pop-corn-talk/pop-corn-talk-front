@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 import { getProducts, order } from "../api/shopping"; 
 
 import './css/profile.css';
@@ -8,7 +8,7 @@ function ProductOrder() {
   const [ProductList, setProductList] = useState(null);
   // state change-> re-rendering
   const params = new URLSearchParams(document.location.search);
-  const pagenNum = params.get("page")
+  const pagenNum = params.get("page");
 
   useEffect(() => {
     getlist(pagenNum);
@@ -26,7 +26,10 @@ function orderItem(itemId) {
     console.log(itemId)
    const a = order(itemId).then((res) => {
       console.log("상품 구매 성공")
-      window.location.reload();
+      const paragraph = document.getElementById(itemId);
+
+      const num = paragraph.textContent;
+      paragraph.textContent = ""+Number(num-1);
    });
 };
 
@@ -46,7 +49,7 @@ function orderItem(itemId) {
             <p>설명 : </p>
             {Product.description}
             <p>가격 : {Product.price}</p>
-            <p>남은 수량 : {Product.amount}</p>
+            <p>남은 수량 : <a id = {Product.id} >{Product.amount}</a></p>
             <br/>
             {/* 이 버튼이 문제!!!! 클릭 하면 모든 상품들이 무한 주문됨*/}
             {/* HTML 이 아니라 react 다!!!  onClick 에 함수 넣으면 무한 반복합니다 ()=> 를 같이 넣어 주세요*/}
