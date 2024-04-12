@@ -24,14 +24,13 @@ function ProductOrder() {
 //buttons
 function orderItem(itemId) {
     console.log(itemId)
-   const a = order(itemId).then((res) => {
-      console.log("상품 구매 성공")
-      const paragraph = document.getElementById(itemId);
-
-      const num = paragraph.textContent;
+    const num = paragraph.textContent;
       if(Number(num-1)<1){
         window.location.reload;
       }
+   const a = order(itemId).then((res) => {
+      console.log("상품 구매 성공")
+      const paragraph = document.getElementById(itemId);
       paragraph.textContent = ""+Number(num-1);
    });
 };
