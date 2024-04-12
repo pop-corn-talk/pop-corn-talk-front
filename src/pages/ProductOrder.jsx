@@ -29,11 +29,13 @@ function orderItem(itemId) {
       const paragraph = document.getElementById(itemId);
 
       const num = paragraph.textContent;
-      if(Number(num-1)<2){
-        window.location.reload;
-      }
+      console.log(num);
+      console.log(Number(num));
+      
       paragraph.textContent = ""+Number(num-1);
-   });
+   }).catch((error) => {
+    window.location.reload;
+  });;
 };
 
   return (
@@ -52,7 +54,7 @@ function orderItem(itemId) {
             <p>설명 : </p>
             {Product.description}
             <p>가격 : {Product.price}</p>
-            <p>남은 수량 : <a id = {Product.id} >{Product.amount}</a></p>
+            <p>남은 수량 : <a id={Product.id}>{Product.amount}</a></p>
             <br/>
             {/* 이 버튼이 문제!!!! 클릭 하면 모든 상품들이 무한 주문됨*/}
             {/* HTML 이 아니라 react 다!!!  onClick 에 함수 넣으면 무한 반복합니다 ()=> 를 같이 넣어 주세요*/}
