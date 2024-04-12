@@ -29,20 +29,20 @@ function OtherProfiles() {
         <br />
       <div style={{ width: 600, height: 500, backgroundColor: "white",marginTop:30,marginLeft:100}}>
       <h2 style={{ marginTop: 30, margin: 20 }}>User Info List : page {pagenNum}</h2>
-      <p style={{display:"block"}}>
+      <div style={{display:"block"}}>
       {userInfoList && (
         <ol>
-          {userInfoList.map(userInfo => <li> {userInfo.email}</li>)}
+          {userInfoList.map(userInfo => <li key={userInfo.email}> {userInfo.email}</li>)}
         </ol>
       )}
-      </p>
+      </div>
       </div>
       <div style={{textAlign:"center"}}>
-      <button class="button">
+      <button className="button">
             1 </button>
-      <button class="button">
+      <button className="button">
             2 </button>
-            <button class="button">
+            <button className="button">
             3 </button>
         </div>
       </div>
