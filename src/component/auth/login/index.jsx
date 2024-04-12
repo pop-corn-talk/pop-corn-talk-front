@@ -6,7 +6,9 @@ import notice from "../../../utils/noticeUtils";
 import useSignForm from "../../../hooks/useSignForm";
 import * as authSytle from "../authStyle";
 import { LoginContainer, loginErrorWrapper, loginLabelCss } from "./style";
-
+import base64 from "base-64";
+import { header } from "../../post/createPostList/style";
+import { notificationApi } from "../../../api/notification";
 const Login = ({ isShown, onOpen }) => {
   const navigate = useNavigate();
   const {
@@ -19,16 +21,44 @@ const Login = ({ isShown, onOpen }) => {
   } = useSignForm();
 
   const handleLoginClick = () => {
+    // 로그인 버튼 클릭시 -> 구독 서비스 get요청 -> 구매했을때 notification을 한번 거쳐야함
     loginApi(userInfo.email, userInfo.password).then((res) => {
-      console.log("Response Data:", res); // Log entire response data
       const authorizationHeader = res.headers["authorization"];
       // Extract Authorization header
       if (authorizationHeader) {
         const accessToken = authorizationHeader.split(" ")[1]; // Extract token from Authorization header
         console.log("Access Token:", accessToken); // Log token value
         localStorage.setItem("access_token", accessToken); // Store token in local storage
-        notice("success", "로그인 성공"); // Display success message
-        navigate("/post"); // Redirect to todo page
+
+        let payload = accessToken.substring(
+          accessToken.indexOf(".") + 1,
+          accessToken.lastIndexOf(".")
+        );
+        let dec = base64.decode(payload);
+        const jsonParse = JSON.parse(dec);
+        const userId = jsonParse.userId;
+        notice("success", "로그인 성공");
+
+        // problem : 알림을 보내기위해서 유저 pk가 필요한데 토큰값이 암호화되어있어서 그상태로 유저정보를 추출이 불가능했음.
+        // think : 토큰값에 id값과 만료시간 등등 토큰 정보가 저장되어있을것..
+        // try 1 : 토큰값 받은것을 그대로 parsing하려함.
+        // try 2 : base64형태로 decode함.
+        // try 3 : decode한 데이터를 json으로 파싱함.
+        // solution : base64로 decoding하여 json으로 파싱했음.
+        console.log("0");
+        notificationApi(userId)
+          //
+          .then((res) => {
+            console.log(res);
+            if (res.status == "success") {
+              console.log("알림 성공!!");
+            } else {
+              console.error("알림 실패");
+            }
+          })
+          .then(() => {
+            navigate("/post"); // Redirect to todo page
+          });
       } else {
         console.error("Authorization header not found in response."); // Log error if Authorization header is missing
       }

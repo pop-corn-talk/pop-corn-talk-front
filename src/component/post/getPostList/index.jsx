@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 const DisplayNewPost = ({ postData }) => {
+  console.log(postData);
   return (
     <>
       {postData.map((post) => (
-        <article className="post-card">
+        <article key={post.id} className="post-card">
           <h2>{post.name}</h2>
           <p>{post.content}</p>
           <img src={post.image} alt="Post Image" />
@@ -14,21 +15,17 @@ const DisplayNewPost = ({ postData }) => {
   );
 };
 
-// Your GetPosts component with potential adjustments
-
-// Imports
-
 const GetPosts = () => {
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1); // Adjusted to 1-based indexing
+  const [page, setPage] = useState(0); // 페이지 번호
 
-  const getPosts = async (currentPage) => {
+  const getPosts = async () => {
     try {
       setLoadingPosts(true);
 
-      const size = 10;
-      const url = `http://localhost:8080/posts?type=0&keyword=&page=${currentPage}&size=${size}`;
+      const size = 10; // 한 페이지에 표시할 게시물 수
+      const url = `http://localhost:8080/posts?type=0&keyword=&page=${page}&size=${size}`;
 
       const token = localStorage.getItem("access_token");
 
@@ -45,16 +42,14 @@ const GetPosts = () => {
       }
 
       const responseData = await response.json();
-      console.log("responseData", responseData);
 
-      if (responseData && responseData.data && responseData.data.content) {
-        const newPosts = responseData.data.content;
-        if (newPosts.length > 0) {
-          setPosts((prevPosts) => [...prevPosts, ...newPosts]);
-          setPage(currentPage + 1); // Updated page number
-        } else {
-          console.log("No more posts available.");
-        }
+      if (
+        responseData &&
+        responseData.data &&
+        responseData.data.content &&
+        responseData.data.content.length > 0
+      ) {
+        setPosts((prevPosts) => [...prevPosts, ...responseData.data.content]);
       } else {
         console.log("No more posts available.");
       }
@@ -66,37 +61,35 @@ const GetPosts = () => {
   };
 
   useEffect(() => {
-    getPosts(page); // Fetch initial posts when the component mounts
-  }, []); // Empty dependency array to run only once on mount
+    // 페이지가 처음 로드될 때 데이터 가져오기
+    getPosts();
+  }, []); // 빈 배열을 전달하여 한 번만 실행되도록 함
 
-  const handleScroll = async () => {
+  const handleScroll = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    if (scrollY + windowHeight >= documentHeight && !loadingPosts) {
-      try {
-        await getPosts(page); // Fetch next page of posts
-      } catch (error) {
-        console.error("An error occurred while fetching posts:", error);
-      }
+    if (scrollY + windowHeight >= documentHeight) {
+      // 페이지 끝에 도달한 경우
+      setPage((prevPage) => prevPage + 1); // 페이지 번호 업데이트
     }
   };
 
   useEffect(() => {
-    // Add scroll event listener when component mounts
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      // Remove scroll event listener when component unmounts
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); // Empty dependency array to add/remove listener only once
+  }, []); // 마운트될 때만 이벤트 리스너를 추가/제거
 
-  // Fetch new posts after a new post is created
   useEffect(() => {
-    getPosts(1); // Fetch latest posts after a new post is created
-  }, []); // Run only on initial mount
+    // 페이지 번호가 변경될 때마다 데이터 가져오기
+    if (page > 0) {
+      getPosts();
+    }
+  }, [page]); // 페이지 번호가 변경될 때마다 실행되도록 함
 
   return <DisplayNewPost postData={posts} />;
 };
