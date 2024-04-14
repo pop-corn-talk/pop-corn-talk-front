@@ -9,12 +9,12 @@ import useAuth from "../hooks/useAuth";
 
 const Auth = () => {
   useAuth();
-  const [isShown, onOpen, onClose] = useIsShown();
+  const [isShown, onOpen, onClose, loginCount] = useIsShown();
 
   return (
     <section css={mainContainer}>
       <SignUp onOpen={onOpen} onClose={onClose} />
-      <Login isShown={isShown} onOpen={onOpen} />
+      <Login isShown={isShown} onOpen={onOpen} loginCount={loginCount} />
     </section>
   );
 };

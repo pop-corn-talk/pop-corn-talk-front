@@ -29,6 +29,9 @@ const SignUp = ({ onOpen, onClose }) => {
       .catch((err) => {
         notice("error", "회원가입 실패");
       });
+    localStorage.setItem("justSignedIn", "true");
+
+    console.log(44);
   };
 
   return (

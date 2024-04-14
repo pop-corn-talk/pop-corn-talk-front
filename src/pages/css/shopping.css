@@ -1,0 +1,25 @@
+.mainDiv{
+    width: 1000px;
+    height: 1000px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+.innderDiv{
+width: 700; 
+height: 500;
+margin-top:30
+}
+.productListContainer{
+    display: flex;
+}
+.productContainer{
+    margin-left: 2;
+    display: block;
+    width: 20%; 
+    height: 500;
+   border :solid;
+   border-color:black;
+}
+

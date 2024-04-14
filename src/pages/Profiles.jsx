@@ -32,7 +32,7 @@ function Profiles() {
   function ToHome() {
     return (
       <button>
-        <Link to="/">Home</Link>
+        <Link to="/post">Home</Link>
       </button>
     );
   }

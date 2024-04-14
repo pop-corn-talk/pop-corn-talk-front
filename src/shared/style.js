@@ -8,4 +8,6 @@ export const COLOR = {
   Purple400: "#24243e",
   Purple450: "#26224f",
   Purple500: "#0f0c29",
+
+  Yellow100: "#e6f7ff",
 };

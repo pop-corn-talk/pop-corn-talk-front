@@ -1,6 +1,6 @@
 import { apiClient } from "./client";
 
-export const notificationApi = async (userId) => {
+export const subscribeApi = async (userId) => {
   console.log("1");
   try {
     // // 헤더에 인증 토큰을 포함하여 요청 보내기

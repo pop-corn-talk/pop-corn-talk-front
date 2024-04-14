@@ -10,12 +10,7 @@ export const customBodyStyle = css`
     align-items: center;
     min-height: 100vh;
     font-family: "Jost", sans-serif;
-    background: linear-gradient(
-      to bottom,
-      ${COLOR.Purple500},
-      ${COLOR.Purple300},
-      ${COLOR.Purple400}
-    );
+    background: linear-gradient(to bottom, ${COLOR.Yellow100});
   }
 `;
 
