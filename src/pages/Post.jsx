@@ -1,32 +1,16 @@
-/** @jsxImportSource @emotion/react */
-import { useEffect, useState } from "react";
-import { getTodoApi } from "../api/todo";
-
-import useAuth from "../hooks/useAuth";
-import { mainContainer } from "../shared/globalStyle";
-import TodoContextWrapper from "../context/TodoContext";
+import React, { Link } from "react";
+import CreatePostList from "../component/post/createPostList";
+import GetPostsListComponent from "../component/post/getPostList";
+import ButtonToUserProfile from "./ButtonToUserProfile";
 
 const Post = () => {
-  useAuth();
-
-  // const [todoData, setTodoData] = useState();
-
-  // useEffect(() => {
-  //   const getData = () => {
-  //     getTodoApi()
-  //       .then((res) => {
-  //         setTodoData(res.data);
-  //       })
-  //       .catch((err) => {
-  //         throw new Error(err);
-  //       });
-  //   };
-  //   getData();
-  // }, []);
-
   return (
-    <section css={mainContainer}>
-      <PostList />
+    <section>
+      {/* CreatePostList 컴포넌트 렌더링 */}
+      <ButtonToUserProfile />
+      <CreatePostList />
+      <GetPostsListComponent />
+      {/* GetPosts 컴포넌트 렌더링 */}
     </section>
   );
 };
