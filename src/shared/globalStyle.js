@@ -16,8 +16,8 @@ export const customBodyStyle = css`
 export const mainContainer = css`
   width: 350px;
   height: 530px;
-  overflow: hidden;
   background: #ecc957;
+  overflow: hidden;
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
 `;

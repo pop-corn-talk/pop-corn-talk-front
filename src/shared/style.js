@@ -9,5 +9,5 @@ export const COLOR = {
   Purple450: "#26224f",
   Purple500: "#0f0c29",
 
-  Yellow100: "#e6f7ff",
+  Yellow100: "#ffe695",
 };

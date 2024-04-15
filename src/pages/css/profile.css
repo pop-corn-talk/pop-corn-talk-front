@@ -1,24 +1,24 @@
 .container {
-    width: 700px;
-    height: 700px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-  }
-  
-  .details {
-    font-family: Arial, sans-serif;
-  }
-  
-  .label {
-    font-weight: bold;
-  }
-  
-  .value {
-    margin-bottom: 10px;
-  }
-  /* Button Styles */
+  width: 700px;
+  height: 700px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.details {
+  font-family: Arial, sans-serif;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  margin-bottom: 10px;
+}
+/* Button Styles */
 .button {
   display: inline-block;
   padding: 10px 20px;
@@ -27,14 +27,14 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid #4CAF50;
-  color: #4CAF50;
+  border: 2px solid #4caf50;
+  color: #4caf50;
   background-color: transparent;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .button:hover {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
