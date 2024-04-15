@@ -10,21 +10,14 @@ export const customBodyStyle = css`
     align-items: center;
     min-height: 100vh;
     font-family: "Jost", sans-serif;
-    background: linear-gradient(to bottom, ${COLOR.Yellow100});
   }
 `;
 
 export const mainContainer = css`
   width: 350px;
   height: 530px;
-  background: red;
   overflow: hidden;
-  background: linear-gradient(
-    to bottom,
-    ${COLOR.Purple450},
-    ${COLOR.Purple300},
-    ${COLOR.Purple450}
-  );
+  background: #ecc957;
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
 `;
