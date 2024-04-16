@@ -18,7 +18,6 @@ const GetPostListComponent = () => {
     if (loading) {
       return;
     }
-
     const nextPage = page + 1; // Calculate the next page number
 
     const url = `http://localhost:8080/posts?type=0&keyword=&page=${nextPage - 1}&size=${size}`;
