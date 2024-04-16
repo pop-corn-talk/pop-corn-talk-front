@@ -112,11 +112,10 @@ const GetPostListComponent = () => {
         },
       });
 
-      console.log("Response:", response); // Log the response object
-
       if (response.ok) {
         const responseData = await response.json();
-        console.log("Response Data:", responseData); // Log the response data
+        console.log("클릭된 게시글 id 기준 댓글 조회 type", response);
+        console.log("클릭된 게시글 id 기준 댓글 조회 data:", responseData); // Log the response data
 
         if (
           responseData &&
@@ -143,12 +142,19 @@ const GetPostListComponent = () => {
   }
 
   useEffect(() => {
+    const token = localStorage.getItem("access_token");
     if (postId) {
       // postId가 변경될 때만 해당 게시물 데이터를 가져옴
-      fetch(`http://localhost:8080/posts/${postId}`)
+      fetch(`http://localhost:8080/posts/${postId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((response) => response.json())
         .then((postData) => {
           setPostData(postData);
+          console.log("클릭한 게시글 id 기준 조회 data", postData);
           console.log(22);
         })
         .catch((error) => {

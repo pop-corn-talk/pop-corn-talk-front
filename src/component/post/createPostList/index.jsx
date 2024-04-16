@@ -50,13 +50,21 @@ const CreatePostList = ({ loginCount }) => {
     }
 
     try {
+      const token = localStorage.getItem("access_token");
       const formData = new FormData();
       formData.append("Image", postImage);
 
-      const response = await fetch("http://localhost:8080/image", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "http://pct-alb-1518631164.ap-northeast-2.elb.amazonaws.com/image",
+        {
+          method: "POST",
+          headers: {
+            //"Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
       if (!response.ok) {
         throw new Error("이미지 업로드에 실패했습니다.");
       }
@@ -73,16 +81,17 @@ const CreatePostList = ({ loginCount }) => {
         postImage: imageUrl,
       };
 
-      const token = localStorage.getItem("access_token");
-
-      const postResponse = await fetch("http://localhost:8080/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(postData),
-      });
+      const postResponse = await fetch(
+        "http://pct-alb-1518631164.ap-northeast-2.elb.amazonaws.com/posts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(postData),
+        }
+      );
       console.log("response", postData);
       if (!postResponse.ok) {
         throw new Error("게시글 등록에 실패했습니다.");
