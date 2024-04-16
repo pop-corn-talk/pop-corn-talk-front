@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import Auth from "./pages/Auth";
 import { lazy, Suspense } from "react";
-// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 import { mainContainer } from "./shared/globalStyle";
 import Profiles from "./pages/Profiles";
 import OtherProfiles from "./pages/OthersProfile";
