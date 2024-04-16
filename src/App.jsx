@@ -7,7 +7,7 @@ import { mainContainer } from "./shared/globalStyle";
 import Profiles from "./pages/Profiles";
 import OtherProfiles from "./pages/OthersProfile";
 import ProductOrder from "./pages/ProductOrder";
-
+import Navbar from "./navbar/navbar"
 const Post = lazy(() => import("./pages/Post"));
 
 console.log(process.env.REACT_APP_API_URL);
@@ -22,6 +22,7 @@ function App() {
           path="/post"
           element={
             <Suspense fallback={<div>...로딩중</div>}>
+              <Navbar />
               <Post />
             </Suspense>
           }

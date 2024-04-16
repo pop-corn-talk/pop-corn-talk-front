@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUserInfoPage } from "../api/usersInfo"; // Assuming you have an apiClient module
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../navbar/navbar"
 import "./css/profile.css";
 
 function OtherProfiles() {
@@ -25,13 +26,9 @@ function OtherProfiles() {
   };
   //
   return (
-    <div style={{ width: 700, height: 700, backgroundColor: "white", display: "block" }}>
-      <button>
-        <Link to="/post">Home</Link>
-      </button>
-      <button>
-        <Link to="/products/shopping">상품구매페이지</Link>
-      </button>
+    <div style={{ width: 840, height: 900, backgroundColor: "white", display: "block" }}>
+      <Navbar />
+
       <br />
       <div
         style={{
