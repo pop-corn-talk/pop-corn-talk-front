@@ -39,3 +39,12 @@ imageClient.interceptors.request.use((config) => {
   }
   return config;
 });
+
+export const postClient = axios.create({
+  baseURL: url,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+    "Access-Control-Expose-Headers": "*",
+  },
+});

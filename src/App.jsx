@@ -1,11 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { Routes, Route } from "react-router-dom";
+import Auth from "./pages/Auth";
 import { lazy, Suspense } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { mainContainer } from "./shared/globalStyle";
 import Profiles from "./pages/Profiles";
 import OtherProfiles from "./pages/OthersProfile";
 import ProductOrder from "./pages/ProductOrder";
 import Navbar from "./navbar/navbar";
+import CreatePostList from "./component/post/createPostList";
 import GetPostListComponent from "./component/post/getPostList";
 const Post = lazy(() => import("./pages/CreatePost"));
 import Home from "./pages/Home";
