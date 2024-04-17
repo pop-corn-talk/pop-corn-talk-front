@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Avatar, Divider, List, Skeleton, Modal, Input, Button } from "antd";
+import { Avatar, Button, Divider, Input, List, Modal, Skeleton } from "antd";
 
 import { apiClient, postClient } from "../../../api/client";
-import Navbar from "../../../navbar/navbar";
 import axios from "axios";
 
 const url = process.env.REACT_APP_API_URL_LOCAL;
@@ -43,8 +42,8 @@ const GetPostListComponent = () => {
           type: 0,
           keyword: "",
           page: nextPage - 1,
-          size: size,
-        },
+          size: size
+        }
       });
 
       const responseData = await response?.data?.data;
@@ -61,6 +60,7 @@ const GetPostListComponent = () => {
       setLoading(false);
     }
   }
+
   async function loadSearchedData() {
     if (loading) {
       return;
@@ -76,8 +76,8 @@ const GetPostListComponent = () => {
           type: 0,
           keyword: searchKeyword, // Use the searchKeyword state variable here
           page: nextPage - 1,
-          size: size,
-        },
+          size: size
+        }
       });
 
       const responseData = await response?.data?.data;
@@ -112,13 +112,17 @@ const GetPostListComponent = () => {
   function handleCancel() {
     setOpen(false);
   }
+
   async function postContentComment(postId) {
     const url = `/posts/${postId}/comments`;
     const data = {
-      content: postComment,
+      content: postComment
     };
-    const response = await apiClient.post(url, data);
-    if (response != null) {
+    try {
+      const response = await apiClient.post(url, data);
+    }
+    catch (error) {
+
     }
   }
 
@@ -161,14 +165,14 @@ const GetPostListComponent = () => {
     if (postId) {
       // postId가 변경될 때만 해당 게시물 데이터를 가져옴
       postClient
-        .get(`/posts/${postId}`)
-        .then((response) => response?.data?.data)
-        .then((postData) => {
-          setPostData(postData);
-        })
-        .catch((error) => {
-          console.error("Error fetching post:", error);
-        });
+      .get(`/posts/${postId}`)
+      .then((response) => response?.data?.data)
+      .then((postData) => {
+        setPostData(postData);
+      })
+      .catch((error) => {
+        console.error("Error fetching post:", error);
+      });
     }
   }, [postId]);
 
@@ -176,11 +180,13 @@ const GetPostListComponent = () => {
     loadMoreData();
   }, []);
 
-  useEffect(() => {}, [postComment]); // Log whenever postComment changes
+  useEffect(() => {
+  }, [postComment]); // Log whenever postComment changes
 
   useEffect(() => {
     getContentTop3();
   }, []);
+
   function handleCommentChange(e) {
     setPostComment(e.target.value);
   }
@@ -189,7 +195,6 @@ const GetPostListComponent = () => {
 
   return (
     <>
-      <Navbar />
       <Search
         placeholder="input search text"
         allowClear
@@ -228,7 +233,7 @@ const GetPostListComponent = () => {
           borderRadius: 15,
           overflow: "auto",
           padding: "0 16px",
-          border: "1px solid rgba(140, 140, 140, 0.35)",
+          border: "1px solid rgba(140, 140, 140, 0.35)"
         }}
       >
         <InfiniteScroll
@@ -239,7 +244,7 @@ const GetPostListComponent = () => {
             <Skeleton
               avatar
               paragraph={{
-                rows: 1,
+                rows: 1
               }}
               active
             />
@@ -321,7 +326,8 @@ const GetPostListComponent = () => {
                 >
                   Send
                 </Button>
-                <button onClick={() => getContentComment(postData.id)}>댓글 로딩확인</button>
+                <button onClick={() => getContentComment(postData.id)}>댓글 로딩확인
+                </button>
               </div>
             </article>
           )}
