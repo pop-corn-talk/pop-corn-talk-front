@@ -17,7 +17,6 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Auth />} />
-
         <Route
           path="/post"
           element={

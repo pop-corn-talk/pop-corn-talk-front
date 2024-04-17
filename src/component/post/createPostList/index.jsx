@@ -59,7 +59,6 @@ const CreatePostList = ({ loginCount }) => {
       formData.append("Image", postImage);
       //todo : url 하드
       const imageUploadResponse = await imageClient.post("/image", formData);
-      console.log("이미지 업로드에 성공했습니다.", imageUploadResponse);
       const imageUrl = imageUploadResponse.data?.data?.imageUrl;
 
       // 이미지 URL을 설정하여 이미지 미리보기 엘리먼트를 업데이트
@@ -73,7 +72,6 @@ const CreatePostList = ({ loginCount }) => {
       console.log(postData);
 
       const postResponse = await apiClient.post("/posts", postData);
-      console.log("게시글 등록에 성공했습니다.", postResponse);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         message.error(error.message);

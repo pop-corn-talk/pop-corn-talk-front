@@ -1,5 +1,5 @@
 import { apiClient } from "./client";
-const url = process.env.REACT_APP_API_URL;
+const url = process.env.REACT_APP_API_URL_LOCAL;
 
 export const getOtherUserInfo = async (userId) => {
   return await apiClient.get(`/users/${userId}/info`);

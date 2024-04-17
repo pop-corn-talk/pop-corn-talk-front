@@ -8,7 +8,7 @@ import SignUp from "../component/auth/signUp";
 import useAuth from "../hooks/useAuth";
 
 const Auth = () => {
-  useAuth();
+  // useAuth();
   const [isShown, onOpen, onClose, loginCount] = useIsShown();
 
   return (
