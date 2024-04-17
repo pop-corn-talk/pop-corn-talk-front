@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import GetPostsListComponent from "../component/post/getPostList";
+
 const getPost = () => {
   return (
     <section>

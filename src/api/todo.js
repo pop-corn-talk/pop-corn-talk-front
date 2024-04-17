@@ -1,4 +1,5 @@
 import { apiClient } from "./client";
+const url = process.env.REACT_APP_API_URL;
 
 export const getTodoApi = async () => {
   return apiClient.get("/todos");

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUserInfoPage } from "../api/usersInfo"; // Assuming you have an apiClient module
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../navbar/navbar"
+import Navbar from "../navbar/navbar";
 import "./css/profile.css";
 
 function OtherProfiles() {

@@ -1,16 +1,15 @@
-import React, { Link } from "react";
-import CreatePostList from "../component/post/createPostList";
+import React, { useState } from "react";
 import GetPostsListComponent from "../component/post/getPostList";
+import MainNavbar from "../component/mainNavbar/mainNavbar"
 
-const Post = () => {
+const Home = () => {
   return (
     <section>
+      <MainNavbar />
       {/* CreatePostList 컴포넌트 렌더링 */}
-      <CreatePostList />
       <GetPostsListComponent />
       {/* GetPosts 컴포넌트 렌더링 */}
     </section>
   );
 };
-
-export default Post;
+export default Home;

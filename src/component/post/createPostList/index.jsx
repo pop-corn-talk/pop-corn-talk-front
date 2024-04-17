@@ -1,9 +1,12 @@
-import React, { useState, Link } from "react";
+import React, { useState, Link, useEffect } from "react";
 
 import "../../../pages/css/post.css";
+import axios from "axios";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import { body } from "./style";
+import { apiClient, imageClient } from "../../../api/client";
+const url = process.env.REACT_APP_API_URL_LOCAL;
 
 const CreatePostList = ({ loginCount }) => {
   const [postName, setPostName] = useState("");
@@ -11,12 +14,14 @@ const CreatePostList = ({ loginCount }) => {
   const [postImage, setPostImage] = useState("");
   const [imgPreview, setImgPreview] = useState("");
 
-  if (loginCount == 1) {
-    console.log("첫 로그인을 환영합니다");
-    message.info("로그인에 성공했습니다! 1000포인트가 지급되었습니다");
-  } else {
-    console.log("환영합니다");
-  }
+  useEffect(() => {
+    if (loginCount == 1) {
+      console.log("첫 로그인을 환영합니다");
+      message.info("로그인에 성공했습니다! 1000포인트가 지급되었습니다");
+    } else {
+      console.log("환영합니다");
+    }
+  }, []);
 
   function handleNameChange(e) {
     setPostName(e.target.value);
@@ -50,26 +55,11 @@ const CreatePostList = ({ loginCount }) => {
     }
 
     try {
-      const token = localStorage.getItem("access_token");
       const formData = new FormData();
       formData.append("Image", postImage);
-
-      const response = await fetch(
-        "http://pct-alb-1518631164.ap-northeast-2.elb.amazonaws.com/image",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
-      if (!response.ok) {
-        throw new Error("이미지 업로드에 실패했습니다.");
-      }
-
-      const imageData = await response.json();
-      const imageUrl = imageData.data.imageUrl;
+      //todo : url 하드
+      const imageUploadResponse = await imageClient.post("/image", formData);
+      const imageUrl = imageUploadResponse.data?.data?.imageUrl;
 
       // 이미지 URL을 설정하여 이미지 미리보기 엘리먼트를 업데이트
       setImgPreview(imageUrl);
@@ -79,25 +69,14 @@ const CreatePostList = ({ loginCount }) => {
         postContent: postContent,
         postImage: imageUrl,
       };
+      console.log(postData);
 
-      const postResponse = await fetch(
-        "http://pct-alb-1518631164.ap-northeast-2.elb.amazonaws.com/posts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(postData),
-        }
-      );
-      console.log("response", postData);
-      if (!postResponse.ok) {
-        throw new Error("게시글 등록에 실패했습니다.");
-      }
-      console.log("게시글 등록에 성공했습니다.", postResponse);
+      const postResponse = await apiClient.post("/posts", postData);
     } catch (error) {
-      console.error("오류 발생:", error);
+      if (axios.isAxiosError(error)) {
+        message.error(error.message);
+      }
+      console.log("게시글 등록에 실패했습니다.", error);
     }
   }
 

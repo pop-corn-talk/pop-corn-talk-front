@@ -1,13 +1,14 @@
 import { apiClient } from "./client";
+const url = process.env.REACT_APP_API_URL_LOCAL;
 
 export const getOtherUserInfo = async (userId) => {
-  return await apiClient.get(`http://localhost:8080/users/${userId}/info`);
+  return await apiClient.get(`/users/${userId}/info`);
 };
 
 export const getUserInfo = async () => {
-  return await apiClient.get(`http://localhost:8080/users/info`);
+  return await apiClient.get(`/users/info`);
 };
 
 export const getUserInfoPage = async (pageNum) => {
-  return await apiClient.get(`http://localhost:8080/users?pageNo=${pageNum}&pageSize=4`);
+  return await apiClient.get(`/users?pageNo=${pageNum}&pageSize=4`);
 };
