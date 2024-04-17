@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUserInfoPage } from "../api/usersInfo"; // Assuming you have an apiClient module
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../navbar/navbar";
 import "./css/profile.css";
 
 function OtherProfiles() {
@@ -21,17 +22,13 @@ function OtherProfiles() {
   };
   // 버튼
   const navigateToPage = (pageNumber) => {
-    //history.push(`/users/listpage?page=${pageNumber}`);
+    window.location.href = `/users/listpage?page=${pageNumber}`;
   };
   //
   return (
-    <div style={{ width: 700, height: 700, backgroundColor: "white", display: "block" }}>
-      <button>
-        <Link to="/post">Home</Link>
-      </button>
-      <button>
-        <Link to="/products/shopping">상품구매페이지</Link>
-      </button>
+    <div style={{ width: 840, height: 900, backgroundColor: "white", display: "block" }}>
+      <Navbar />
+
       <br />
       <div
         style={{
@@ -54,9 +51,9 @@ function OtherProfiles() {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <button className="button">1 </button>
-        <button className="button">2 </button>
-        <button className="button">3 </button>
+        <button className="button" onClick={()=>navigateToPage(1)}>1 </button>
+        <button className="button" onClick={()=>navigateToPage(2)}>2 </button>
+        <button className="button" onClick={()=>navigateToPage(3)}>3 </button>
       </div>
     </div>
   );

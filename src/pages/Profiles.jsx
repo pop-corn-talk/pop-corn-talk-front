@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { getUserInfo } from "../api/usersInfo";
-import { Link } from "react-router-dom";
 import "./css/profile.css";
+import Navbar from "../navbar/navbar";
 
-function Profiles() {
+export default function Profiles() {
   const [userInfo, setUserInfo] = useState(null); // Using useState hook to manage state
 
   useEffect(() => {
-    // Function to execute when the component mounts
     handleButtonClick();
   }, []);
 
@@ -15,39 +14,31 @@ function Profiles() {
     getUserInfo()
       .then((res) => {
         console.log("success", "조회 성공 : " + res.data.data.email);
+        console.log(res)
         setUserInfo(res.data.data);
       })
       .catch((err) => {
         console.log("error");
       });
   };
-  //
-  function ToUserPage() {
-    return (
-      <button>
-        <Link to="/users/listpage?page=1">other profile</Link>
-      </button>
-    );
-  }
-  function ToHome() {
-    return (
-      <button>
-        <Link to="/post">Home</Link>
-      </button>
-    );
-  }
+
   return (
     <div>
-      <ToUserPage />
-      <ToHome />
+      <Navbar/>
       {userInfo && (
-        <div className="container">
+        <div className="profilecontainer">
           <div className="details">
             <h2>User Info</h2>
+            <br /> 
+            <div style={{margin:"auto",width:200}}>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" />
+            <br />     
+            <br />    
             <a className="label">Email : </a>
             <a className="value">{userInfo.email} </a>
             <p className="label">오늘 남은 포인트 얻기: {userInfo.dailyPostsLimit}</p>
             <p className="label">포인트: {userInfo.point}</p>
+            </div>
           </div>
         </div>
       )}
@@ -55,4 +46,3 @@ function Profiles() {
   );
 }
 
-export default Profiles;

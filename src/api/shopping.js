@@ -1,5 +1,5 @@
 import { apiClient } from "./client";
-
+const url = process.env.REACT_APP_API_URL_LOCAL;
 export const getProducts = async () => {
   return await apiClient.get(`/products`);
 };

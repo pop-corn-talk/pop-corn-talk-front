@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getProducts, order } from "../api/shopping";
-
+import { Card } from "antd";
+const { Meta } = Card;
+import Navbar from "../navbar/navbar";
 import "./css/profile.css";
 import "./css/shopping.css";
 
@@ -29,47 +31,60 @@ function ProductOrder() {
       window.location.reload();
     });
   }
+  function movePage(itemId) {
+    window.location.reload();
+  }
 
   return (
-    <div className="mainDiv">
-      <br />
-      <div className="innerDiv">
-        <h2 style={{ marginTop: 30, margin: 20, display: "block" }}>
-          Product List : page {pagenNum}
-        </h2>
+    <div>
+      <Navbar />
+      <div className="mainDiv">
+        <br />
+        <div className="innerDiv">
+          <h2 style={{ marginTop: 30, margin: 20, display: "block" }}>
+            Product List : page {pagenNum}
+          </h2>
 
-        {ProductList && (
-          <div className="productListContainer">
-            {ProductList.map((Product) => (
-              <div className="productContainer" key={Product.id}>
-                {Product.id}
-                <p>
-                  이름 : <small>{Product.name}</small>
-                </p>
-                <img style={{ height: 100, width: 150 }} src={Product.image} />
-                <p>설명 : </p>
-                {Product.description}
-                <p>가격 : {Product.price}</p>
-                <p>남은 수량 : {Product.amount}</p>
-                <br />
-                {/* 이 버튼이 문제!!!! 클릭 하면 모든 상품들이 무한 주문됨*/}
-                {/* HTML 이 아니다!!  onClick 에 함수 넣으면 무한 반복합니다 ()=> 를 같이 넣어 주세요*/}
-                <button className="button" onClick={() => orderItem(Product.id)}>
-                  {" "}
-                  주문{" "}
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <button className="button">1 </button>
-        <button className="button">2 </button>
-        <button className="button">3 </button>
+          {ProductList && (
+            <div className="productListContainer">
+              {ProductList.map((Product) => (
+                <div className="productContainer" key={Product.id}>
+                  <Card
+                    style={{
+                      width: 200,
+                    }}
+                    cover={
+                      <img
+                        style={{
+                          width: 200,
+                          height: 150,
+                        }}
+                        alt="Product image"
+                        src={Product.image}
+                      />
+                    }
+                  >
+                    <Meta title={Product.name} />
+                    <br />
+                    설명 : {Product.description}
+                    <p>가격 : {Product.price}</p>
+                    <p>남은 수량 : {Product.amount}</p>
+                    <button className="button" onClick={() => orderItem(Product.id)}>
+                      주문
+                    </button>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <button className="button" onClick={() => movePage(1)}>
+            1{" "}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
-
 export default ProductOrder;

@@ -17,8 +17,6 @@ const SignUp = ({ onOpen, onClose }) => {
   } = useSignForm();
 
   const handleSignUpClick = (e) => {
-    console.log("이메일", userInfo.email);
-    console.log("비밀번호", userInfo.password);
     e.preventDefault();
     signUpApi(userInfo.email, userInfo.password)
       .then(() => {
@@ -30,8 +28,6 @@ const SignUp = ({ onOpen, onClose }) => {
         notice("error", "회원가입 실패");
       });
     localStorage.setItem("justSignedIn", "true");
-
-    console.log(44);
   };
 
   return (
