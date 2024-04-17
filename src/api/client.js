@@ -54,6 +54,7 @@ const updateToken = (newToken) => {
   localStorage.setItem('access_token', newToken); // Assuming JWT is stored in localStorage
 };
 
+// 토큰 재발급 메소드
 apiClient.interceptors.response.use((response) => {
   console.log("response.headers");
     console.log(response.headers);
@@ -64,7 +65,15 @@ apiClient.interceptors.response.use((response) => {
       if (newToken && newToken.startsWith('Bearer')) {
         newToken = newToken.substring(7)
         updateToken(newToken);
-        window.location.reload()
+        //alert("새로운 토큰이 발급 되었습니다, ")
+        // 
+        //window.location.reload()
+        let originalRequest = response.config;
+        let originalRequestString = JSON.stringify(originalRequest);
+        console.log(originalRequestString.includes());
+        if(!originalRequestString.includes("login")){
+          return apiClient(originalRequest);
+        }
       }
     }
     console.log(response)
