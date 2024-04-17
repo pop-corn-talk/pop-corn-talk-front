@@ -11,6 +11,7 @@ import { header } from "../../post/createPostList/style";
 import { subscribeApi } from "../../../api/notification";
 import { useState, useEffect } from "react";
 import { message } from "antd";
+const url = process.env.REACT_APP_API_URL_LOCAL;
 
 const LoginComponent = ({ isShown, onOpen }) => {
   const navigate = useNavigate();
@@ -29,26 +30,25 @@ const LoginComponent = ({ isShown, onOpen }) => {
   const handleLoginClick = () => {
     loginApi(userInfo.email, userInfo.password).then((res) => {
       const authorizationHeader = res.headers["authorization"];
-      if (authorizationHeader) {
-        const accessToken = authorizationHeader.split(" ")[1];
-        localStorage.setItem("access_token", accessToken);
-        localStorage.setItem("justLoggedIn", "true");
-        // Wait for userId to be set
-        const storedLoginCount = localStorage.getItem(`loginCount_${userId}`);
-        if (!storedLoginCount) {
-          // 값이 null 또는 유효한 숫자 형식이 아닌 경우 처리
-          console.error("Invalid loginCount value found in localStorage.");
-          localStorage.setItem(`loginCount_${userId}`, 1);
-          setLoginCount(1);
-          message.info("처음 가입하셨습니다! 1000포인트가 지급되었습니다");
-          navigate("/post"); // Redirect to todo page
-        } else {
-          // 유효한 숫자 형식인 경우 처리
-          const newLoginCount = parseInt(storedLoginCount) + 1;
-          localStorage.setItem(`loginCount_${userId}`, newLoginCount);
-          setLoginCount(newLoginCount); // Update loginCount state
-          navigate("/post"); // Redirect to todo page
-        }
+      const accessToken = authorizationHeader.split(" ")[1];
+      console.log("accessToken", accessToken);
+      localStorage.setItem("access_token", accessToken);
+      localStorage.setItem("justLoggedIn", "true");
+      // Wait for userId to be set
+      const storedLoginCount = localStorage.getItem(`loginCount_${userId}`);
+      if (!storedLoginCount) {
+        // 값이 null 또는 유효한 숫자 형식이 아닌 경우 처리
+        console.error("Invalid loginCount value found in localStorage.");
+        localStorage.setItem(`loginCount_${userId}`, 1);
+        setLoginCount(1);
+        message.info("처음 가입하셨습니다! 1000포인트가 지급되었습니다");
+        navigate("/post"); // Redirect to todo page
+      } else {
+        // 유효한 숫자 형식인 경우 처리
+        const newLoginCount = parseInt(storedLoginCount) + 1;
+        localStorage.setItem(`loginCount_${userId}`, newLoginCount);
+        setLoginCount(newLoginCount); // Update loginCount state
+        navigate("/post"); // Redirect to todo page
       }
     });
   };

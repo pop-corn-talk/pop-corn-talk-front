@@ -7,10 +7,10 @@ import { mainContainer } from "./shared/globalStyle";
 import Profiles from "./pages/Profiles";
 import OtherProfiles from "./pages/OthersProfile";
 import ProductOrder from "./pages/ProductOrder";
-import Navbar from "./navbar/navbar"
-const Post = lazy(() => import("./pages/Post"));
-
-console.log(process.env.REACT_APP_API_URL);
+import Navbar from "./navbar/navbar";
+import CreatePostList from "./component/post/createPostList";
+import GetPostListComponent from "./component/post/getPostList";
+const Post = lazy(() => import("./pages/CreatePost"));
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
             </Suspense>
           }
         />
+        <Route path="/getPost" element={<GetPostListComponent />} />
         <Route path="/users/profile" element={<Profiles />} />
         <Route path="/users/listpage" element={<OtherProfiles />} />
         <Route path="/products/shopping" element={<ProductOrder />} />

@@ -1,14 +1,15 @@
-import React, { Link } from "react";
+import { React } from "react";
 import CreatePostList from "../component/post/createPostList";
 import GetPostsListComponent from "../component/post/getPostList";
-
+import { Link } from "react-router-dom";
 const Post = () => {
   return (
     <section>
-      {/* CreatePostList 컴포넌트 렌더링 */}
       <CreatePostList />
-      <GetPostsListComponent />
-      {/* GetPosts 컴포넌트 렌더링 */}
+      <button>
+        <Link to="/getPost">게시글 전체보기</Link>
+      </button>
+      {/* <GetPostsListComponent /> */}
     </section>
   );
 };
