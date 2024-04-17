@@ -7,10 +7,10 @@ import Login from "../component/auth/login";
 import SignUp from "../component/auth/signUp";
 import useAuth from "../hooks/useAuth";
 
+
 const Auth = () => {
   useAuth();
   const [isShown, onOpen, onClose, loginCount] = useIsShown();
-
   return (
     <section css={mainContainer}>
       <SignUp onOpen={onOpen} onClose={onClose} />
