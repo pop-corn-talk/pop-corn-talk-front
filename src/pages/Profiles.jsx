@@ -7,7 +7,6 @@ export default function Profiles() {
   const [userInfo, setUserInfo] = useState(null); // Using useState hook to manage state
 
   useEffect(() => {
-    // Function to execute when the component mounts
     handleButtonClick();
   }, []);
 
@@ -15,6 +14,7 @@ export default function Profiles() {
     getUserInfo()
       .then((res) => {
         console.log("success", "조회 성공 : " + res.data.data.email);
+        console.log(res)
         setUserInfo(res.data.data);
       })
       .catch((err) => {

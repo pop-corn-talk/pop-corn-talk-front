@@ -137,6 +137,23 @@ h2#post_name {
   font-weight: bold; /* Apply bold font weight */
   margin-bottom: 10px; /* Adjust the margin bottom as needed */
 }
+#scrollableNoticedDiv {
+  position: absolute; /* 절대 위치로 설정 */
+  top: calc(100% - 60%); /* top3-posts 아래에 위치하도록 설정 */
+  left: 20px; /* 좌측 여백 조정 */
+  width: calc(100% - 40px); /* 전체 너비에서 좌우 여백 제외 */
+  background-color: #ffffff; /* 배경색 지정 */
+  border: 1px solid #ccc; /* 테두리 설정 */
+  border-radius: 5px; /* 테두리를 둥글게 처리 */
+  padding: 10px; /* 내부 여백 설정 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+  z-index: 999; /* 다른 요소 위에 표시되도록 설정 */
+  width: 300;
+  height: 230;
+  border-radius: 15;
+  overflow: "auto";
+  padding: "0 16px";
+}
 #post_name,
 #post_content,
 #post_imgPreview,

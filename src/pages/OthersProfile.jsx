@@ -22,7 +22,7 @@ function OtherProfiles() {
   };
   // 버튼
   const navigateToPage = (pageNumber) => {
-    //history.push(`/users/listpage?page=${pageNumber}`);
+    window.location.href = `/users/listpage?page=${pageNumber}`;
   };
   //
   return (
@@ -51,9 +51,9 @@ function OtherProfiles() {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <button className="button">1 </button>
-        <button className="button">2 </button>
-        <button className="button">3 </button>
+        <button className="button" onClick={()=>navigateToPage(1)}>1 </button>
+        <button className="button" onClick={()=>navigateToPage(2)}>2 </button>
+        <button className="button" onClick={()=>navigateToPage(3)}>3 </button>
       </div>
     </div>
   );
