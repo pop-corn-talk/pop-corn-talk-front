@@ -26,10 +26,17 @@ function ProductOrder() {
   //buttons
   function orderItem(itemId) {
     console.log(itemId);
-    const a = order(itemId).then((res) => {
-      console.log("상품 구매 성공");
-      window.location.reload();
-    });
+    const a = order(itemId)
+  .then((res) => {
+    console.log("상품 구매 성공");
+    alert("상품 구매 성공");
+    window.location.reload();
+  })
+  .catch((error) => {
+    console.error("상품 구매 실패:", error);
+    alert("상품 구매에 실패했습니다. 다시 시도해주세요.");
+    window.location.reload();
+  });
   }
   function movePage(itemId) {
     window.location.reload();
