@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Route, Routes } from "react-router-dom";
+import React from "react";
 import Auth from "./pages/Auth";
 import { lazy, Suspense } from "react";
 import "react-toastify/dist/ReactToastify.css";

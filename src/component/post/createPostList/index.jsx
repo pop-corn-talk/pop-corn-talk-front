@@ -60,7 +60,6 @@ const CreatePostList = ({ loginCount }) => {
       //todo : url 하드
       const imageUploadResponse = await imageClient.post("/image", formData);
       const imageUrl = imageUploadResponse.data?.data?.imageUrl;
-
       // 이미지 URL을 설정하여 이미지 미리보기 엘리먼트를 업데이트
       setImgPreview(imageUrl);
 
@@ -123,7 +122,7 @@ const CreatePostList = ({ loginCount }) => {
     <>
       <div>
         <article id="posts">
-          <div class="post-container">
+          <div className="post-container">
             <p id="post_name">
               <input
                 type="text"
@@ -158,14 +157,21 @@ const CreatePostList = ({ loginCount }) => {
               onChange={handleImageChange}
             />
 
-            <button id="post_submitBtn">게시글 등록</button>
+            <button
+              id="post_submitBtn"
+              onClick={() => {
+                handleSubmit().then();
+              }}
+            >
+              게시글 등록
+            </button>
           </div>
         </article>
       </div>
       <>
         <div>
           <article id="posts">
-            <div class="post-container">
+            <div className="post-container">
               <p id="post_name">
                 <input
                   type="text"
