@@ -30,7 +30,7 @@ const ModifyNRemovePostComponent = ({
       const response = await commentPostClient.post(url, data);
       if (response) {
         message.info("댓글 작성이 완료되었습니다다");
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

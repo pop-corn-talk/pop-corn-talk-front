@@ -5,7 +5,7 @@ import { signUpApi } from "../../../api/auth";
 import useSignForm from "../../../hooks/useSignForm";
 import * as authSytle from "../authStyle";
 import { signUperrorWrapper, signUplabelCss } from "./style";
-
+import React from "react";
 const SignUp = ({ onOpen, onClose }) => {
   const {
     userInfo,
@@ -32,6 +32,7 @@ const SignUp = ({ onOpen, onClose }) => {
 
   return (
     <form onSubmit={handleSignUpClick}>
+      {/* eslint-disable-next-line react/no-unknown-property */}
       <label aria-hidden="true" css={signUplabelCss} onClick={onClose}>
         Sign up
       </label>
@@ -40,6 +41,7 @@ const SignUp = ({ onOpen, onClose }) => {
         type="text"
         placeholder="Email"
         required=""
+        // eslint-disable-next-line react/no-unknown-property
         css={authSytle.inputCss}
         onChange={handleInputValue("email")}
       />
@@ -47,10 +49,11 @@ const SignUp = ({ onOpen, onClose }) => {
         type="password"
         placeholder="Password"
         required=""
+        // eslint-disable-next-line react/no-unknown-property
         css={authSytle.inputCss}
         onChange={handleInputValue("password")}
       />
-
+      {/* eslint-disable-next-line react/no-unknown-property */}
       <div css={signUperrorWrapper}>
         {emailWarnList?.map((item) => (
           <div key={item}>{item}</div>

@@ -17,7 +17,7 @@ export const loginLabelCss = css`
   padding-top: 15px;
 `;
 
-export const loginErrorWrapper = css`
+export const loginErrorWrapper = styled.div`
   ${authSytle.errorWrapper}
   color: ${COLOR.Purple200};
 `;

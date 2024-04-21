@@ -28,7 +28,7 @@ function ProductOrder() {
     console.log(itemId);
     const a = order(itemId).then((res) => {
       console.log("상품 구매 성공");
-      window.location.reload();
+      // window.location.reload();
     });
   }
   function movePage(itemId) {

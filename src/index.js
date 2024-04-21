@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Global } from "@emotion/react";
-import React from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
