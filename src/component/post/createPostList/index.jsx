@@ -6,7 +6,6 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import { body } from "./style";
 import { apiClient, imageClient } from "../../../api/client";
-const url = process.env.REACT_APP_API_URL_LOCAL;
 
 const CreatePostList = ({ loginCount }) => {
   const [postName, setPostName] = useState("");

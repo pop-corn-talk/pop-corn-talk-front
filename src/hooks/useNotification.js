@@ -21,7 +21,7 @@ export const useNotification = (accessToken) => {
   if (!accessToken) {
     return;
   }
-  const url = process.env.REACT_APP_API_URL_LOCAL;
+  const url = process.env.REACT_APP_API_URL_SERVER;
 
   try {
     const eventSource = new EventSourcePolyfill(`${url}/notification/subscribe`, {
