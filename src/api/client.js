@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = process.env.REACT_APP_API_URL_LOCAL;
+const url = process.env.REACT_APP_API_URL;
 console.log("url", url);
 
 export const apiClient = axios.create({
