@@ -8,6 +8,8 @@ import { ToastContainer } from "react-toastify";
 import * as authStyle from "../authStyle";
 import { LoginContainer, loginErrorWrapper, loginLabelCss } from "./style";
 import { css } from "@emotion/react";
+import { COLOR } from "../../../shared/style";
+import { buttonCss } from "../authStyle";
 
 const LoginComponent = ({ isShown, onOpen, accessToken, setAccessToken }) => {
   const navigate = useNavigate();
@@ -84,18 +86,28 @@ const LoginComponent = ({ isShown, onOpen, accessToken, setAccessToken }) => {
             <div key={item}>{item}</div>
           ))}
         </div>
-        <button
-          // eslint-disable-next-line react/no-unknown-property
-          css={css`
-            ${authStyle.AuthButton}
-          `}
-          onClick={handleLoginClick}
-          disabled={!emailIsAbled || !passwordIsAbled}
-          data-emailisabled={emailIsAbled.toString()}
-          data-passwordisabled={passwordIsAbled.toString()}
-        >
-          Login
-        </button>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <button
+            style={{
+              backgroundColor:
+                emailIsAbled === false || passwordIsAbled === false ? "gray" : `${COLOR.Purple200}`,
+              ...buttonCss,
+              color: "white",
+              borderRadius: "5%",
+              width: "50%",
+              height: "40px",
+              border: "none",
+              marginTop: "25px",
+              cursor: "pointer",
+            }}
+            onClick={handleLoginClick}
+            disabled={!emailIsAbled || !passwordIsAbled}
+            data-emailisabled={emailIsAbled.toString()}
+            data-passwordisabled={passwordIsAbled.toString()}
+          >
+            Login
+          </button>
+        </div>
       </LoginContainer>
       <ToastContainer position="top-right" />
     </>

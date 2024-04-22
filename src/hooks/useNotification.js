@@ -33,6 +33,7 @@ export const useNotification = (accessToken) => {
     eventSource.addEventListener("sendProduct", (event) => {
       const parsedData = JSON.parse(event.data);
       const sender = parsedData.sender; // Access sender property directly
+
       setNotification(parsedData);
       message.success(sender).then();
     });
