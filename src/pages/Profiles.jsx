@@ -14,7 +14,7 @@ export default function Profiles() {
     getUserInfo()
       .then((res) => {
         console.log("success", "조회 성공 : " + res.data.data.email);
-        console.log(res)
+        console.log(res);
         setUserInfo(res.data.data);
       })
       .catch((err) => {
@@ -24,20 +24,22 @@ export default function Profiles() {
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       {userInfo && (
         <div className="profilecontainer">
           <div className="details">
             <h2>User Info</h2>
-            <br /> 
-            <div style={{margin:"auto",width:200}}>
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" />
-            <br />     
-            <br />    
-            <a className="label">Email : </a>
-            <a className="value">{userInfo.email} </a>
-            <p className="label">오늘 남은 포인트 얻기: {userInfo.dailyPostsLimit}</p>
-            <p className="label">포인트: {userInfo.point}</p>
+            <br />
+            <div style={{ margin: "auto", width: 200 }}>
+              <img src="https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" />
+              <br />
+              <br />
+              <a className="label">Email : </a>
+              <a className="value">{userInfo.email} </a>
+              <p className="label">
+                일일 게시글 작성 포인트 지급 남은 횟수: {userInfo.dailyPostsLimit}
+              </p>
+              <p className="label">잔여 포인트: {userInfo.point}</p>
             </div>
           </div>
         </div>
@@ -45,4 +47,3 @@ export default function Profiles() {
     </div>
   );
 }
-

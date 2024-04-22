@@ -39,7 +39,7 @@ const SignUp = ({ onOpen, onClose }) => {
 
       <input
         type="text"
-        placeholder="Email"
+        placeholder="이메일 주소 형식을 지켜주세요"
         required=""
         // eslint-disable-next-line react/no-unknown-property
         css={authSytle.inputCss}
@@ -47,7 +47,7 @@ const SignUp = ({ onOpen, onClose }) => {
       />
       <input
         type="password"
-        placeholder="Password"
+        placeholder="8글자~20자, 대소문자,숫자,특수문자를 포함하세요."
         required=""
         // eslint-disable-next-line react/no-unknown-property
         css={authSytle.inputCss}

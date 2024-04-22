@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import React from "react";
 import error from "eslint-plugin-react/lib/util/error";
+
 const ModifyNRemovePostComponent = ({
   postComments,
   setPostComments,
@@ -17,6 +18,7 @@ const ModifyNRemovePostComponent = ({
   const [inputComments, setInputComments] = useState("");
   const [postImage, setPostImage] = useState(postData.image);
   const [imgPreview, setImgPreview] = useState(postData.image);
+  const [isImageUploading, setIsImageUploading] = useState(false);
   function handleCommentChange(e) {
     setInputComments(e.target.value);
   }
@@ -26,17 +28,16 @@ const ModifyNRemovePostComponent = ({
     const data = {
       content: inputComments,
     };
-    try {
-      const response = await commentPostClient.post(url, data);
-      if (response) {
-        message.info("댓글 작성이 완료되었습니다다");
-        // window.location.reload();
-      }
-    } catch (error) {
+
+    const response = await commentPostClient.post(url, data);
+    if (response) {
+      message.info("댓글 작성이 완료되었습니다");
+      // window.location.reload();
+    } else {
+      message.error("로그인 후 이용해주세요");
       if (axios.isAxiosError(error)) {
         message.error(error.message);
       }
-      console.error(error);
     }
   }
 
@@ -47,9 +48,16 @@ const ModifyNRemovePostComponent = ({
     setPostContent(value);
   }
   // editing true => 수정완료 handleSubmit
-  function handleImageChange(e) {
+  async function handleImageChange(e) {
+    setIsImageUploading(true);
     const file = e.target.files[0];
-    setPostImage(file);
+    const formData = new FormData();
+    formData.append("Image", file);
+    //todo : url 하드
+    const imageUploadResponse = await imageClient.post("/image", formData);
+    const imageUrl = imageUploadResponse.data?.data?.imageUrl;
+    setPostImage(imageUrl);
+    setIsImageUploading(false);
     const reader = new FileReader();
     reader.onload = () => {
       setImgPreview(reader.result);
@@ -57,32 +65,27 @@ const ModifyNRemovePostComponent = ({
     reader.readAsDataURL(file);
   }
   async function submitModifiedPost() {
-    const formData = new FormData();
-    formData.append("Image", postImage);
-    //todo : url 하드
-    const imageUploadResponse = await imageClient.post("/image", formData);
-    const imageUrl = imageUploadResponse.data?.data?.imageUrl;
-    console.log("imageUrl", imageUrl);
+    // console.log("imageUrl", imageUrl);
     // 이미지 URL을 설정하여 이미지 미리보기 엘리먼트를 업데이트
-    setImgPreview(imageUrl);
+    // setImgPreview(imageUrl);
     // setIsEditing(true);
+
     const modifiedData = {
       postName: postName,
       postContent: postContent,
-      postImage: imageUrl,
+      postImage: postImage,
     };
     console.log(postImage);
-    try {
-      const url = `/posts/${postData.id}`;
-      const response = await postPostClient.put(url, modifiedData);
-      if (response) {
-        message.success("게시글 수정이 완료되었습니다.");
-      }
-    } catch (error) {
+
+    const url = `/posts/${postData.id}`;
+    const response = await postPostClient.put(url, modifiedData);
+    if (response) {
+      message.success("게시글 수정이 완료되었습니다.");
+    } else {
+      message.error("로그인 후 이용해주세요");
       if (axios.isAxiosError(error)) {
         message.error(error.message);
       }
-      console.error(error);
     }
   }
   async function handleDeletePost() {
@@ -103,18 +106,17 @@ const ModifyNRemovePostComponent = ({
       }
       console.error(error);
     }
-    try {
-      const deleteUrl = `/posts/${postData.id}`;
-      const response = await postPostClient.delete(deleteUrl);
-      console.log(response);
-      if (response) {
-        message.success("게시글 삭제가 완료되었습니다.");
-      }
-    } catch (e) {
+
+    const deleteUrl = `/posts/${postData.id}`;
+    const response = await postPostClient.delete(deleteUrl);
+    console.log(response);
+    if (response) {
+      message.success("게시글 삭제가 완료되었습니다.");
+    } else {
+      message.error("로그인 후 이용해주세요");
       if (axios.isAxiosError(error)) {
         message.error(error.message);
       }
-      console.error(error);
     }
   }
   function handleEditClick() {
@@ -131,7 +133,7 @@ const ModifyNRemovePostComponent = ({
 
   return (
     <>
-      <Button type="primary" onClick={handleEditClick}>
+      <Button type="primary" onClick={handleEditClick} loading={isImageUploading}>
         {isEditing ? "수정 완료" : "수정"}
       </Button>
       <Button

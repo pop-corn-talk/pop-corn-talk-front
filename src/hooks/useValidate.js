@@ -16,12 +16,12 @@ const useValidate = (type) => {
     }
     const regexforValAuth = {
       password: {
-        warnText: "비밀번호는 8글자 이상이어야 합니다.",
-        fn: new RegExp("(?=.{8,})"),
+        warnText: "",
+        fn: new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$"),
       },
       email: {
-        warnText: "이메일에는 @가 포함되어야 합니다.",
-        fn: new RegExp("@"),
+        warnText: "",
+        fn: new RegExp("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"),
       },
     };
     const { warnText, fn } = regexforValAuth[type];

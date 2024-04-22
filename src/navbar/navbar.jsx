@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="container">
-        <h1 className="logo">Logo</h1>
+        <h1 className="logo">PopcornTalk</h1>
         <ul className="nav-links">
           <Link to="/">
             <li>

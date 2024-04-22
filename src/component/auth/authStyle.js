@@ -16,6 +16,7 @@ export const labelCss = css`
 export const inputCss = css`
   width: 60%;
   height: 20px;
+  font-size: 0.5em;
   background: ${COLOR.White200};
   justify-content: center;
   display: flex;
