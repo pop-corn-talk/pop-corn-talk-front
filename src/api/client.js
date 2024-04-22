@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const url = process.env.REACT_APP_API_URL_SERVER;
-console.log("url", url);
+const urls = process.env.REACT_APP_API_URL_SERVER;
+console.log("url", urls);
 
 export const apiClient = axios.create({
-  baseURL: url,
+  baseURL: urls,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -13,7 +13,7 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  console.log("config", config.url);
+  console.log("config", config.baseURL);
   const accessToken = localStorage.getItem("access_token");
 
   if (accessToken && config.headers) {
@@ -23,7 +23,7 @@ apiClient.interceptors.request.use((config) => {
 });
 
 export const imageClient = axios.create({
-  baseURL: url,
+  baseURL: urls,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Expose-Headers": "*",
@@ -31,7 +31,7 @@ export const imageClient = axios.create({
 });
 
 imageClient.interceptors.request.use((config) => {
-  console.log("config", config.url);
+  console.log("config", config.baseURL);
   const accessToken = localStorage.getItem("access_token");
 
   if (accessToken && config.headers) {
@@ -71,7 +71,7 @@ imageClient.interceptors.response.use(
 );
 
 export const postGetClient = axios.create({
-  baseURL: url,
+  baseURL: urls,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export const postGetClient = axios.create({
 });
 
 export const postPostClient = axios.create({
-  baseURL: url,
+  baseURL: urls,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const postPostClient = axios.create({
   },
 });
 postPostClient.interceptors.request.use((config) => {
-  console.log("config", config.url);
+  console.log("config", config.baseURL);
   const accessToken = localStorage.getItem("access_token");
 
   if (accessToken && config.headers) {
@@ -98,7 +98,7 @@ postPostClient.interceptors.request.use((config) => {
 });
 
 export const commentGetClient = axios.create({
-  baseURL: url,
+  baseURL: urls,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export const commentGetClient = axios.create({
   },
 });
 export const commentPostClient = axios.create({
-  baseURL: url,
+  baseURL: urls,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -114,7 +114,7 @@ export const commentPostClient = axios.create({
   },
 });
 commentPostClient.interceptors.request.use((config) => {
-  console.log("config", config.url);
+  console.log("config", config.baseURL);
   const accessToken = localStorage.getItem("access_token");
 
   if (accessToken && config.headers) {
