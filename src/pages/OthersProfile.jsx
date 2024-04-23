@@ -21,9 +21,7 @@ function OtherProfiles() {
     });
   };
   // 버튼
-  const navigateToPage = (pageNumber) => {
-    window.location.href = `/users/listpage?page=${pageNumber}`;
-  };
+  const navigateToPage = (pageNumber) => {};
   //
   return (
     <div style={{ width: 840, height: 900, backgroundColor: "white", display: "block" }}>
@@ -51,9 +49,9 @@ function OtherProfiles() {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <button className="button" onClick={()=>navigateToPage(1)}>1 </button>
-        <button className="button" onClick={()=>navigateToPage(2)}>2 </button>
-        <button className="button" onClick={()=>navigateToPage(3)}>3 </button>
+        <button className="button" onClick={() => navigateToPage(1)}>
+          1{" "}
+        </button>
       </div>
     </div>
   );
