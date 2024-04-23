@@ -18,6 +18,7 @@ const SignUp = ({ onOpen, onClose }) => {
 
   const handleSignUpClick = (e) => {
     e.preventDefault();
+    localStorage.removeItem("access_token");
     signUpApi(userInfo.email, userInfo.password)
       .then(() => {
         e.target.reset();

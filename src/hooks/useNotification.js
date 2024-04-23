@@ -33,13 +33,13 @@ export const useNotification = (accessToken) => {
       const parsedData = JSON.parse(event.data);
 
       setNotification(parsedData);
-      message.success(parsedData);
+      message.success(event.data);
     });
     eventSource.addEventListener("addComment", (event) => {
       const parsedData = JSON.parse(event.data);
       const sender = parsedData.sender; // Access sender property directly
       setNotification(parsedData);
-      message.success(sender);
+      message.success(event.data.sender);
     });
   } catch (error) {
     console.error("Error creating EventSource:", error);
