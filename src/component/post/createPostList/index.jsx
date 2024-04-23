@@ -2,16 +2,17 @@ import React, { useState, Link, useEffect } from "react";
 
 import "../../../pages/css/post.css";
 import axios from "axios";
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, message, Upload } from "antd";
-import { body } from "./style";
+import { message } from "antd";
 import { apiClient, imageClient } from "../../../api/client";
+import {useNavigate} from "react-router";
 
 const CreatePostList = ({ loginCount }) => {
   const [postName, setPostName] = useState("");
   const [postContent, setPostContent] = useState("");
   const [postImage, setPostImage] = useState("");
   const [imgPreview, setImgPreview] = useState("");
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (loginCount == 1) {
@@ -70,6 +71,10 @@ const CreatePostList = ({ loginCount }) => {
       console.log(postData);
 
       const postResponse = await apiClient.post("/posts", postData);
+      if (postResponse){
+        message.success("게시글 작성이 완료되셨습니다");
+        navigate("/");
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         message.error(error.message);

@@ -1,9 +1,10 @@
 import { Button, Image, Input, List, message, Typography } from "antd";
 import { commentPostClient, imageClient, postPostClient } from "../../../api/client";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import error from "eslint-plugin-react/lib/util/error";
+import { useNavigate } from "react-router";
 
 const ModifyNRemovePostComponent = ({
   postComments,
@@ -19,6 +20,8 @@ const ModifyNRemovePostComponent = ({
   const [postImage, setPostImage] = useState(postData.image);
   const [imgPreview, setImgPreview] = useState(postData.image);
   const [isImageUploading, setIsImageUploading] = useState(false);
+  const navigate = useNavigate();
+
   function handleCommentChange(e) {
     setInputComments(e.target.value);
   }
@@ -35,6 +38,7 @@ const ModifyNRemovePostComponent = ({
       // window.location.reload();
     } else {
       message.error("로그인 후 이용해주세요");
+      navigate("/Auth");
       if (axios.isAxiosError(error)) {
         message.error(error.message);
       }
@@ -43,9 +47,11 @@ const ModifyNRemovePostComponent = ({
 
   function handleNameChange(value) {
     setPostName(value);
+    console.log(value);
   }
   function handleContentChange(value) {
     setPostContent(value);
+    console.log(value);
   }
   // editing true => 수정완료 handleSubmit
   async function handleImageChange(e) {
@@ -53,7 +59,7 @@ const ModifyNRemovePostComponent = ({
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("Image", file);
-    //todo : url 하드
+
     const imageUploadResponse = await imageClient.post("/image", formData);
     const imageUrl = imageUploadResponse.data?.data?.imageUrl;
     setPostImage(imageUrl);
@@ -69,6 +75,7 @@ const ModifyNRemovePostComponent = ({
     // 이미지 URL을 설정하여 이미지 미리보기 엘리먼트를 업데이트
     // setImgPreview(imageUrl);
     // setIsEditing(true);
+    const token = await localStorage.getItem("access_token");
 
     const modifiedData = {
       postName: postName,
@@ -79,13 +86,17 @@ const ModifyNRemovePostComponent = ({
 
     const url = `/posts/${postData.id}`;
     const response = await postPostClient.put(url, modifiedData);
-    if (response) {
+    const isModified =
+      postName !== postData.name ||
+      postContent !== postData.content ||
+      postImage !== postData.image;
+    if (isModified) {
       message.success("게시글 수정이 완료되었습니다.");
     } else {
+      message.error("게시글을 수정후 수정완료 버튼을 눌러주세요");
+    }
+    if (!token) {
       message.error("로그인 후 이용해주세요");
-      if (axios.isAxiosError(error)) {
-        message.error(error.message);
-      }
     }
   }
   async function handleDeletePost() {

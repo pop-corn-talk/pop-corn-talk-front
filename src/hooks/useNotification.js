@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import { NativeEventSource, EventSourcePolyfill } from "event-source-polyfill";
-import { json } from "react-router-dom";
+import { useState } from "react";
+import { EventSourcePolyfill } from "event-source-polyfill";
 import { message } from "antd";
 
 export const useNotification = (accessToken) => {
@@ -32,16 +31,15 @@ export const useNotification = (accessToken) => {
     handleEventSource(eventSource);
     eventSource.addEventListener("sendProduct", (event) => {
       const parsedData = JSON.parse(event.data);
-      const sender = parsedData.sender; // Access sender property directly
 
       setNotification(parsedData);
-      message.success(sender).then();
+      message.success(parsedData);
     });
     eventSource.addEventListener("addComment", (event) => {
       const parsedData = JSON.parse(event.data);
       const sender = parsedData.sender; // Access sender property directly
       setNotification(parsedData);
-      message.success(sender).then();
+      message.success(sender);
     });
   } catch (error) {
     console.error("Error creating EventSource:", error);

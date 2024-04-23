@@ -6,10 +6,10 @@ import useSignForm from "../../../hooks/useSignForm";
 import { message } from "antd";
 import { ToastContainer } from "react-toastify";
 import * as authStyle from "../authStyle";
+import { buttonCss } from "../authStyle";
 import { LoginContainer, loginErrorWrapper, loginLabelCss } from "./style";
 import { css } from "@emotion/react";
 import { COLOR } from "../../../shared/style";
-import { buttonCss } from "../authStyle";
 
 const LoginComponent = ({ isShown, onOpen, accessToken, setAccessToken }) => {
   const navigate = useNavigate();
@@ -28,12 +28,19 @@ const LoginComponent = ({ isShown, onOpen, accessToken, setAccessToken }) => {
 
   const handleLoginClick = async () => {
     try {
+      const token = localStorage.getItem("access_token");
       const res = await loginApi(userInfo.email, userInfo.password);
       const authorizationHeader = res.headers["authorization"];
       const splitedToken = authorizationHeader.split(" ")[1];
       await setToken(splitedToken);
-      localStorage.setItem("access_token", splitedToken);
+      if (token && splitedToken) {
+        localStorage.removeItem("access_token");
+        localStorage.setItem("access_token", splitedToken);
+      } else if (!splitedToken) {
+        message.error("새로운 토큰 에러 발생");
+      }
       localStorage.setItem("justLoggedIn", "true");
+      message.info("환영합니다. 회원가입이 완료되어 1000포인트가 지급되었습니다.");
       navigate("/post");
     } catch (error) {
       console.error("Login failed:", error);
@@ -86,7 +93,13 @@ const LoginComponent = ({ isShown, onOpen, accessToken, setAccessToken }) => {
             <div key={item}>{item}</div>
           ))}
         </div>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <button
             style={{
               backgroundColor:
