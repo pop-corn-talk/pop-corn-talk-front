@@ -30,16 +30,14 @@ export const useNotification = (accessToken) => {
     });
     handleEventSource(eventSource);
     eventSource.addEventListener("sendProduct", (event) => {
-      const parsedData = JSON.parse(event.data);
-
-      setNotification(parsedData);
+      setNotification(event.data);
       message.success(event.data);
     });
     eventSource.addEventListener("addComment", (event) => {
-      const parsedData = JSON.parse(event.data);
-      const sender = parsedData.sender; // Access sender property directly
-      setNotification(parsedData);
-      message.success(event.data.sender);
+      const data = JSON.parse(event.data);
+      const sender = data.sender;
+      setNotification(event.data);
+      message.success(sender);
     });
   } catch (error) {
     console.error("Error creating EventSource:", error);

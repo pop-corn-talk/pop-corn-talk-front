@@ -15,7 +15,7 @@ function ProductOrder() {
   useEffect(() => {
     getlist(pagenNum);
   }, []);
-  //헬로우
+  //hello
   const getlist = (pages) => {
     getProducts(pages).then((res) => {
       console.log(res);
@@ -28,13 +28,15 @@ function ProductOrder() {
     console.log(itemId);
     const a = order(itemId).then((res) => {
       console.log("상품 구매 성공");
-      // window.location.reload();
+      const paragraph = document.getElementById(itemId);
+      const num = paragraph.textContent;
+      if (Number(num - 1) < 1) {
+        alert("현제 선택하신 상품의 재고가 없습니다.");
+      } else {
+        paragraph.textContent = "" + Number(num - 1);
+      }
     });
   }
-  function movePage(itemId) {
-    window.location.reload();
-  }
-
   return (
     <div>
       <Navbar />
@@ -68,7 +70,9 @@ function ProductOrder() {
                     <br />
                     설명 : {Product.description}
                     <p>가격 : {Product.price}</p>
-                    <p>남은 수량 : {Product.amount}</p>
+                    <p>
+                      남은 수량 : <a id={Product.id}>{Product.amount}</a>
+                    </p>
                     <button className="button" onClick={() => orderItem(Product.id)}>
                       주문
                     </button>
@@ -79,9 +83,7 @@ function ProductOrder() {
           )}
         </div>
         <div style={{ textAlign: "center" }}>
-          <button className="button" onClick={() => movePage(1)}>
-            1{" "}
-          </button>
+          <button className="button">1 </button>
         </div>
       </div>
     </div>
