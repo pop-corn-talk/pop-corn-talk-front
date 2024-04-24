@@ -17,7 +17,7 @@ const useValidate = (type) => {
     const regexforValAuth = {
       password: {
         warnText: "",
-        fn: new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$"),
+        fn: new RegExp("^[A-Za-z0-9]{4,12}$"),
       },
       email: {
         warnText: "",

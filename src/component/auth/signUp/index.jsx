@@ -48,7 +48,7 @@ const SignUp = ({ onOpen, onClose }) => {
       />
       <input
         type="password"
-        placeholder="8글자~20자, 대소문자,숫자,특수문자를 포함하세요."
+        placeholder="영문,숫자를 이용하여 최소 4글자 최대 12글자까지 입력할 수 있습니다."
         required=""
         // eslint-disable-next-line react/no-unknown-property
         css={authSytle.inputCss}
